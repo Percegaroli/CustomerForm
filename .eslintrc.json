@@ -5,6 +5,11 @@
         "node": true,
         "jest": true
     },
+    "settings": {
+      "import/resolver": {
+        "typescript": {}
+      }
+    },
     "extends": [
         "plugin:react/recommended",
         "airbnb",
@@ -13,7 +18,7 @@
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
-            "jsx": true,
+            "jsx": true
         },
         "ecmaVersion": 12,
         "sourceType": "module"
@@ -28,10 +33,12 @@
         "space-before-function-paren": "off",
         "react/prop-types": "off",
         "no-use-before-define": "off",
-        "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".jsx"] }],
-        "react/jsx-props-no-spreading": [true, {
-          "html": "ignore",
-          "custom": "ignore"
-      }]
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+        "react/jsx-props-no-spreading": "off",
+        "import/extensions": "off",
+        "no-shadow": "off",
+        "no-empty-function": "off",
+        "@typescript-eslint/no-empty-function": ["error"]
     }
 }

@@ -1,0 +1,23 @@
+.Container {
+  background-color: #DBE4EE;
+  min-height: 100vh;
+}
+
+.Title {
+  font-size: 30px;
+  line-height: 36px;
+  color: #054A91;
+}
+
+.FormCard {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.CustomerFormInput {
+  margin-bottom: 10px;
+}

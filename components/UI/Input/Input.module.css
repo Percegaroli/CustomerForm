@@ -1,0 +1,53 @@
+.Input {
+  border: 1px solid #DBE4EE;
+  box-sizing: border-box;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 14px;
+  color: #182532;
+  padding: 8px 15px;
+  width: 100%;
+  outline: none;
+  height: 34px;
+  background-color: transparent;
+  transition: border-color .15s;
+}
+
+.Input::placeholder{
+  font-style: italic;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.Selected {
+  border: 2px solid #054A91;
+}
+
+.Error {
+  border-color: #F17300;
+}
+
+.Filled {
+  border-color: #054A91;
+}
+
+.Label {
+  font-size: 12px;
+  line-height: 14px;
+  color: #2D2D2E;
+  margin-bottom: 4px;
+}
+
+.ErrorCaption {
+  font-style: italic;
+  font-weight: 300;
+  font-size: 8px;
+  line-height: 10px;
+  color: #F17300;
+  margin-top: 2px;
+}
+
+.Container {
+  height: 64px;
+}

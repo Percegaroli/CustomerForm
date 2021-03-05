@@ -1,0 +1,24 @@
+.Button {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 16px 42px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+  font-family: inherit;
+  letter-spacing: 0.05em;
+}
+
+.Filled {
+  background: #054A91;
+  box-shadow: 2px 3px 4px 1px #DBE4EE;
+  border-radius: 20px;
+  color: #DBE4EE;
+}
+
+.Outlined {
+  color: #054A91;
+  background-color: transparent;
+  border: 1px solid #054A91;
+}

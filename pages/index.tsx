@@ -1,15 +1,15 @@
 import React from 'react';
 import Head from 'next/head';
-import SignInForm from '../components/UI/Input/SignInForm';
+import SignUp from '../components/SignUp';
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>Formulário</title>
+        <title>Sign Up Form</title>
       </Head>
 
-      <SignInForm />
+      <SignUp />
     </>
   );
 }
