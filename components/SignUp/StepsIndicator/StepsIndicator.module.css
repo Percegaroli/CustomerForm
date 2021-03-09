@@ -1,0 +1,13 @@
+.Container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Step {
+  margin-right: 33px;
+}
+
+.Step:last-of-type{
+  margin-right: 0;
+}

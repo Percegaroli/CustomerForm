@@ -1,0 +1,11 @@
+.Step {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: #DBE4EE;
+  border: none;
+}
+
+.Active {
+  background-color: #3E7CB1;
+}
