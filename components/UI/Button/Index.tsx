@@ -11,10 +11,11 @@ interface Props {
 
 const Button = (props: Props) => {
   const {
- onClick, text, variant, className, disabled, } = props;
+    onClick, text, variant, className, disabled,
+  } = props;
 
   const returnButtonClassName = () => {
-    const buttonVariante =      variant === 'filled' ? styles.Filled : styles.Outlined;
+    const buttonVariante = variant === 'filled' ? styles.Filled : styles.Outlined;
     const disableVariant = disabled ? styles.Disabled : '';
     return `${styles.Button} ${buttonVariante} ${className} ${disableVariant}`;
   };

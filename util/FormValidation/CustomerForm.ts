@@ -15,7 +15,7 @@ const emailValidation = (email: string) => {
 
 const birthDateValidation = (birthDate: string) => {
   const date = new Date(birthDate);
-  return !Number.isNaN(date) ? 'Insira uma data de nascimento válida' : '';
+  return Number.isNaN(date.getTime()) ? 'Insira uma data de nascimento válida' : '';
 };
 
 export const postalCodeValidation = (postalCode: string) => {
@@ -23,7 +23,10 @@ export const postalCodeValidation = (postalCode: string) => {
   return postalCodeFormatted.length !== 8 ? 'Insira um Cep valido' : '';
 };
 
-const stateValidation = (state: string) => (state.length !== 2 ? 'Insira um Estado válido' : '');
+const stateValidation = (state: string) => {
+  if (state === '') return '';
+  return state.length !== 2 ? 'Insira um Estado válido' : '';
+};
 
 const passwordValidation = (state: CustomerForm) => {
   const { password, passwordConfirmation } = state;

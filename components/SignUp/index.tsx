@@ -9,6 +9,8 @@ import { CustomerFormValidation } from '../../util/FormValidation/CustomerForm';
 import { CustomerFormMaskInput } from '../../util/FormFieldMask/CustomerForm';
 import PersonalDataStep from './PersonalDataStep';
 import { postNewCustomer } from '../../services/customer';
+import UseSnackBar from '../../hooks/UseSnackBar';
+import { PostNewCustomerDTO } from '../../services/customer/interface';
 
 const initialState: CustomerForm = {
   name: '',
@@ -28,6 +30,7 @@ const SignUp: React.FC = () => {
   const [formState, setFormState] = useState(initialState);
   const [fieldErrors, setFieldErrors] = useState(initialState);
   const [activeStep, setActiveStep] = useState(1);
+  const { renderSnackBar, configSnackBar } = UseSnackBar();
 
   const changeFormField = (field: keyof CustomerForm, newValue: string) => {
     const valueWithMask = CustomerFormMaskInput[field](newValue);
@@ -47,8 +50,12 @@ const SignUp: React.FC = () => {
     setFieldErrors(newError);
   };
 
+  const validateField = (
+    field: keyof CustomerForm,
+  ) => CustomerFormValidation[field](formState, field);
+
   const validateFields = (field: keyof CustomerForm) => {
-    const errorMessage = CustomerFormValidation[field](formState, field);
+    const errorMessage = validateField(field);
     if (errorMessage) {
       setFieldErrors({
         ...fieldErrors,
@@ -57,9 +64,73 @@ const SignUp: React.FC = () => {
     }
   };
 
+  const canAdvanceStep = () => {
+    const stepOneFields: Array<keyof CustomerForm> = ['name', 'birthDate', 'password', 'passwordConfirmation', 'phone', 'email'];
+    const stepTwoFields: Array<keyof CustomerForm> = ['postalCode', 'city', 'state', 'streetName', 'neighborhood'];
+    let canAdvance = false;
+    if (activeStep === 1) {
+      const validatedFields = stepOneFields.map((step) => validateField(step));
+      const errorIndex = validatedFields.findIndex((field) => field !== '');
+      const [
+        name,
+        birthDate,
+        password,
+        passwordConfirmation,
+        phone,
+        email,
+      ] = validatedFields;
+      setFieldErrors({
+        ...fieldErrors,
+        name,
+        birthDate,
+        password,
+        passwordConfirmation,
+        phone,
+        email,
+      });
+      canAdvance = errorIndex === -1;
+    } else {
+      const validatedFields = stepTwoFields.map((step) => validateField(step));
+      const errorIndex = validatedFields.findIndex((field) => field !== '');
+      const [
+        postalCode,
+        city,
+        state,
+        streetName,
+        neighborhood,
+      ] = validatedFields;
+      setFieldErrors({
+        ...fieldErrors,
+        postalCode,
+        city,
+        state,
+        streetName,
+        neighborhood,
+      });
+      canAdvance = errorIndex === -1;
+    }
+    return canAdvance;
+  };
+
+  const advanceButtonAction = () => {
+    if (canAdvanceStep()) {
+      if (activeStep === 1) {
+        setActiveStep(2);
+      } else {
+        submitForm();
+      }
+    }
+  };
+
   const submitForm = async () => {
-    const newState: CustomerForm = {
-      ...formState,
+    const newState: PostNewCustomerDTO = {
+      name: formState.name,
+      city: formState.city,
+      email: formState.email,
+      password: formState.password,
+      neighborhood: formState.neighborhood,
+      state: formState.state,
+      streetName: formState.streetName,
       birthDate: formState.birthDate.replace(/\D/g, ''),
       phone: formState.phone.replace(/\D/g, ''),
       postalCode: formState.postalCode.replace(/\D/g, ''),
@@ -67,7 +138,7 @@ const SignUp: React.FC = () => {
     try {
       await postNewCustomer(newState);
     } catch (error) {
-
+      configSnackBar({ message: error.toString(), time: 4, isError: true });
     }
   };
 
@@ -79,7 +150,7 @@ const SignUp: React.FC = () => {
         onClick={() => setActiveStep(1)}
         variant="outlined"
       />
-      <Button text="Next" onClick={() => setActiveStep(2)} variant="filled" />
+      <Button text="Next" onClick={advanceButtonAction} variant="filled" />
     </div>
   );
 
@@ -96,6 +167,7 @@ const SignUp: React.FC = () => {
       onChangeInput={changeFormField}
       setState={setFormState}
       state={formState}
+      setErrors={setFieldErrors}
       validateFields={validateFields}
     />
   ));
@@ -108,6 +180,7 @@ const SignUp: React.FC = () => {
         <StepsIndicator activeStep={activeStep} />
         {renderButtons()}
       </Card>
+      {renderSnackBar()}
     </div>
   );
 };

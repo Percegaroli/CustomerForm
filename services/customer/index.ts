@@ -1,6 +1,6 @@
 import Axios from 'axios';
-import { CustomerForm } from '../../model/Customer/interface';
+import { PostNewCustomerDTO } from './interface';
 
-export const postNewCustomer = (body: CustomerForm) => Axios.post('http://unicodesoftware-interno.ddns.net:3333', body);
+export const postNewCustomer = (body: PostNewCustomerDTO) => Axios.post('http://unicodesoftware-interno.ddns.net:3333/customer', body);
 
 export default {};

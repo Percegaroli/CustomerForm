@@ -5,7 +5,9 @@ import { CustomerForm } from '../../../model/Customer/interface';
 import { consultarEnderecoPeloCep } from '../../../services/cep';
 import Input from '../../UI/Input';
 import styles from '../SignUp.module.css';
+import localStyles from './AddressStep.module.css';
 import { postalCodeValidation } from '../../../util/FormValidation/CustomerForm';
+import UseSnackBar from '../../../hooks/UseSnackBar';
 
 interface Props {
   state: CustomerForm;
@@ -13,12 +15,14 @@ interface Props {
   onChangeInput: (key: keyof CustomerForm, value: string) => void;
   error: CustomerForm;
   validateFields: (field: keyof CustomerForm) => void
+  setErrors: (erros: CustomerForm) => void
 }
 
 const AddressStep = (props: Props) => {
   const {
-    state, onChangeInput, error, setState, validateFields,
+    state, onChangeInput, error, setState, validateFields, setErrors,
   } = props;
+  const { configSnackBar, renderSnackBar } = UseSnackBar();
 
   const onBlurAction = (field: keyof CustomerForm) => {
     if (field === 'postalCode') {
@@ -42,8 +46,20 @@ const AddressStep = (props: Props) => {
           streetName: street,
           state: estado,
         });
+        setErrors({
+          ...error,
+          postalCode: '',
+          city: '',
+          neighborhood: '',
+          streetName: '',
+          state: '',
+        });
       } catch (err) {
-
+        configSnackBar({
+          message: 'Falha ao consultar serviço de CEP. Por favor preencha seu endereço manualmente',
+          time: 4,
+          isError: true,
+        });
       }
     }
   };
@@ -64,13 +80,14 @@ const AddressStep = (props: Props) => {
   };
 
   return (
-    <>
+    <div className={localStyles.Container}>
       {renderInputElement('postalCode')}
       {renderInputElement('state')}
       {renderInputElement('city')}
       {renderInputElement('streetName')}
       {renderInputElement('neighborhood')}
-    </>
+      {renderSnackBar()}
+    </div>
   );
 };
 

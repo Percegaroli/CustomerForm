@@ -62,6 +62,7 @@ const Input = (props: Props) => {
       onBlur={actionOnBlur}
       onFocus={() => setIsOnFocus(true)}
       placeholder={placeholder}
+      autoComplete="off"
       className={`${styles.Input} ${classVariant} ${
         classes.inputElement ?? ''
       }`}
@@ -71,7 +72,9 @@ const Input = (props: Props) => {
   const renderCaption = () => {
     if (error) {
       return (
-        <h6 className={`${styles.ErrorCaption} ${classes.caption ?? ''}`}>
+        <h6
+          className={`${styles.ErrorCaption} ${classes.caption ?? ''}`}
+        >
           {error}
         </h6>
       );

@@ -6,7 +6,7 @@ const formatBirthDate = (birthDate: string) => {
   if (birthDateNumbers.length > 4) {
     const day = birthDateNumbers.slice(0, 2);
     const month = birthDateNumbers.slice(2, 4);
-    const year = birthDateNumbers.slice(4);
+    const year = birthDateNumbers.slice(4, 8);
     birthDateWithMask = `${day}/${month}/${year}`;
   } else if (birthDateNumbers.length > 2) {
     const day = birthDateNumbers.slice(0, 2);
@@ -19,10 +19,10 @@ const formatBirthDate = (birthDate: string) => {
 const formatPhoneNumber = (phone: string) => {
   const phoneNumbers = phone.trim().replace(/\D/g, '');
   let phoneWithMask = phone;
-  if (phoneNumbers.length === 11) {
+  if (phoneNumbers.length >= 11) {
     const ddd = phoneNumbers.slice(0, 2);
     const fiveDigits = phoneNumbers.slice(2, 7);
-    const fourDigits = phoneNumbers.slice(7);
+    const fourDigits = phoneNumbers.slice(7, 11);
     phoneWithMask = `(${ddd}) ${fiveDigits}-${fourDigits}`;
   } else if (phoneNumbers.length > 6) {
     const ddd = phoneNumbers.slice(0, 2);
@@ -47,6 +47,8 @@ const formatPostalCode = (postalCode: string) => {
   return postalCodeNumber;
 };
 
+const formatState = (state: string) => state.trim().toUpperCase();
+
 const identity = (value: string) => value;
 
 export const CustomerFormMaskInput: ICustomerFormMask = {
@@ -59,7 +61,7 @@ export const CustomerFormMaskInput: ICustomerFormMask = {
   passwordConfirmation: identity,
   phone: formatPhoneNumber,
   postalCode: formatPostalCode,
-  state: identity,
+  state: formatState,
   streetName: identity,
 };
 

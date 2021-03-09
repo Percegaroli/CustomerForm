@@ -37,14 +37,14 @@ const PersonalDataStep = (props: Props) => {
   };
 
   return (
-    <>
+    <div>
       {renderInputElement('name')}
       {renderInputElement('email')}
       {renderInputElement('phone')}
       {renderInputElement('birthDate')}
       {renderInputElement('password', true)}
       {renderInputElement('passwordConfirmation', true)}
-    </>
+    </div>
   );
 };
 

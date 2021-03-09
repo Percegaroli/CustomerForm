@@ -10,8 +10,14 @@ const StepsIndicator = (props: Props) => {
   const { activeStep } = props;
   return (
     <div className={styles.Container}>
-      <Step active={activeStep === 1} className={styles.Step} />
-      <Step active={activeStep === 2} className={styles.Step} />
+      <Step
+        active={activeStep === 1}
+        className={styles.Step}
+      />
+      <Step
+        active={activeStep === 2}
+        className={styles.Step}
+      />
     </div>
   );
 };

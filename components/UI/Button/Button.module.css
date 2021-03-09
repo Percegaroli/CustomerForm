@@ -9,6 +9,7 @@
   font-family: inherit;
   letter-spacing: 0.05em;
   border-radius: 20px;
+  outline: none;
 }
 
 .Filled {

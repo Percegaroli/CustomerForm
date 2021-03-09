@@ -8,7 +8,13 @@ interface Props {
 
 const Card = (props: Props) => {
   const { children, className } = props;
-  return <div className={`${styles.Card} ${className}`}>{children}</div>;
+  return (
+    <div
+      className={`${styles.Card} ${className}`}
+    >
+      {children}
+    </div>
+  );
 };
 
 Card.defaultProps = {
