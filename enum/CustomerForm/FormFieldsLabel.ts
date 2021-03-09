@@ -9,6 +9,7 @@ export enum CustomerFormFieldsLabel {
   STREETNAME = 'Street Name',
   CITY = 'City',
   STATE = 'State',
+  NEIGHBORHOOD = 'Neighborhood'
 }
 
 export default CustomerFormFieldsLabel;

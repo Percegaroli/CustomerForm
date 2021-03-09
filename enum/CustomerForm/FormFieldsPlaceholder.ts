@@ -6,9 +6,10 @@ export enum CustomerFormFieldsPlaceholder {
   PASSWORDCONFIRMATION = 'Must match password above',
   BIRTHDATE = '23/01/1970',
   POSTALCODE = '13500-510',
-  STREETNAME = 'Centro',
+  STREETNAME = 'Avenida 22',
   CITY = 'Rio Claro',
   STATE = 'SP',
+  NEIGHBORHOOD = 'Centro'
 }
 
 export default {};

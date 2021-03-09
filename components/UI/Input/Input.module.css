@@ -13,7 +13,8 @@
   transition: border-color .15s;
 }
 
-.Input::placeholder{
+.Input::placeholder {
+  font-family: inherit;
   font-style: italic;
   font-weight: normal;
   font-size: 10px;
@@ -33,16 +34,16 @@
 }
 
 .Label {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 14px;
   color: #2D2D2E;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 }
 
 .ErrorCaption {
   font-style: italic;
   font-weight: 300;
-  font-size: 8px;
+  font-size: 12px;
   line-height: 10px;
   color: #F17300;
   margin-top: 2px;

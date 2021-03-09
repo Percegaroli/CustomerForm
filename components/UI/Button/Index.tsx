@@ -6,19 +6,26 @@ interface Props {
   text: string;
   variant?: 'filled' | 'outlined';
   className?: string;
+  disabled?: boolean;
 }
 
 const Button = (props: Props) => {
   const {
- onClick, text, variant, className, } = props;
+ onClick, text, variant, className, disabled, } = props;
 
   const returnButtonClassName = () => {
     const buttonVariante =      variant === 'filled' ? styles.Filled : styles.Outlined;
-    return `${styles.Button} ${buttonVariante} ${className}`;
+    const disableVariant = disabled ? styles.Disabled : '';
+    return `${styles.Button} ${buttonVariante} ${className} ${disableVariant}`;
   };
 
   return (
-    <button type="button" className={returnButtonClassName()} onClick={onClick}>
+    <button
+      type="button"
+      className={returnButtonClassName()}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {text}
     </button>
   );
@@ -27,6 +34,7 @@ const Button = (props: Props) => {
 Button.defaultProps = {
   className: '',
   variant: 'filled',
+  disabled: false,
 };
 
 export default Button;

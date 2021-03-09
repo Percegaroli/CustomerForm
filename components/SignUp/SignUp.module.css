@@ -21,3 +21,14 @@
 .CustomerFormInput {
   margin-bottom: 10px;
 }
+
+.ButtonsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.ButtonsContainer button:last-of-type {
+  margin-left: 21px;
+}
