@@ -28,18 +28,6 @@ const stateValidation = (state: string) => {
   return state.length !== 2 ? 'Insira um Estado válido' : '';
 };
 
-const passwordValidation = (state: CustomerForm) => {
-  const { password, passwordConfirmation } = state;
-  const passwordFilledError = requiredFieldValidation(password);
-  if (passwordFilledError) return passwordFilledError;
-  if (passwordConfirmation !== '') {
-    if (password !== passwordConfirmation) {
-      return 'Password must match';
-    }
-  }
-  return '';
-};
-
 const fieldNotValidated = () => '';
 
 export const CustomerFormValidation: ICustomerFormValidation = {
