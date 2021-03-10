@@ -186,7 +186,9 @@ const SignUp: React.FC = () => {
         <div className={styles.Bar} />
         <div className={styles.FormContainer}>
           <div className={styles.FormInputContainer}>
-            <h1 className={styles.Title}>Join Us</h1>
+            <h1 className={styles.Title}>
+              Faça seu cadastro.
+            </h1>
             {renderActiveStep()}
           </div>
           <StepsIndicator activeStep={activeStep} />

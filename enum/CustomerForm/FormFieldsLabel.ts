@@ -1,15 +1,15 @@
 export enum CustomerFormFieldsLabel {
-  NAME = 'Name',
+  NAME = 'Nome',
   EMAIL = 'Email',
-  PHONE = 'Phone',
-  PASSWORD = 'Password',
-  PASSWORDCONFIRMATION = 'Confirm Password',
-  BIRTHDATE = 'Birth Date',
-  POSTALCODE = 'Postal Code',
-  STREETNAME = 'Street Name',
-  CITY = 'City',
-  STATE = 'State',
-  NEIGHBORHOOD = 'Neighborhood'
+  PHONE = 'Telefone',
+  PASSWORD = 'Senha',
+  PASSWORDCONFIRMATION = 'Confirme sua senha',
+  BIRTHDATE = 'Data de Nascimento',
+  POSTALCODE = 'CEP',
+  STREETNAME = 'Rua',
+  CITY = 'Cidade',
+  STATE = 'Estado',
+  NEIGHBORHOOD = 'Bairro'
 }
 
 export default CustomerFormFieldsLabel;
