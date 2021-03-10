@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import SnackBar from '../components/UI/SnackBar';
+import SnackBar from '../../components/UI/SnackBar';
+import styles from './UseSnackBar.module.css';
 
 interface Config {
-  message: string,
+  messages: Array<string>,
   time: number,
   isError?: boolean
 }
 
 const UseSnackBar = () => {
-  const [message, setMessage] = useState('');
+  const [messages, setMessages] = useState<Array<string>>([]);
   const [time, setTime] = useState(0);
   const [isError, setIsError] = useState(false);
 
@@ -19,21 +20,26 @@ const UseSnackBar = () => {
   const resetSnackBar = () => {
     setIsError(false);
     setTime(0);
-    setMessage('');
+    setMessages([]);
   };
 
   const configSnackBar = (config: Config) => {
-    setMessage(config.message);
+    setMessages(config.messages);
     setTime(config.time);
     setIsError(config.isError ?? false);
   };
 
   const renderSnackBar = () => (
-    <SnackBar
-      isShowing={time !== 0}
-      message={message}
-      isError={isError}
-    />
+    <div className={styles.Container}>
+      {messages.map((message) => (
+        <SnackBar
+          isShowing={time !== 0}
+          message={message}
+          isError={isError}
+          className={styles.Snackbar}
+        />
+      ))}
+    </div>
   );
 
   return { renderSnackBar, configSnackBar };

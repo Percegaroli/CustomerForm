@@ -59,7 +59,7 @@ const AddressStep = (props: Props) => {
         });
       } catch (err) {
         configSnackBar({
-          message: 'Falha ao consultar serviço de CEP. Por favor preencha seu endereço manualmente',
+          messages: ['Falha ao consultar serviço de CEP. Por favor preencha seu endereço manualmente'],
           time: 4,
           isError: true,
         });

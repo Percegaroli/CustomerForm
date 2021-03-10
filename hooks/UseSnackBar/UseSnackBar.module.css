@@ -1,0 +1,15 @@
+.Container {
+  position: fixed;
+  top: 10px;
+  right: 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.Snackbar {
+  position: static;
+  padding: 10px;
+  width: 400px;
+}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Axios from 'axios';
 import Card from '../UI/Card';
 import styles from './SignUp.module.css';
 import { CustomerForm } from '../../model/Customer/interface';
@@ -17,8 +18,6 @@ const initialState: CustomerForm = {
   email: '',
   birthDate: '',
   phone: '',
-  password: '',
-  passwordConfirmation: '',
   city: '',
   neighborhood: '',
   postalCode: '',
@@ -66,7 +65,7 @@ const SignUp: React.FC = () => {
   };
 
   const canAdvanceStep = () => {
-    const stepOneFields: Array<keyof CustomerForm> = ['name', 'birthDate', 'password', 'passwordConfirmation', 'phone', 'email'];
+    const stepOneFields: Array<keyof CustomerForm> = ['name', 'birthDate', 'phone', 'email'];
     const stepTwoFields: Array<keyof CustomerForm> = ['postalCode', 'city', 'state', 'streetName', 'neighborhood'];
     let canAdvance = false;
     if (activeStep === 1) {
@@ -75,8 +74,6 @@ const SignUp: React.FC = () => {
       const [
         name,
         birthDate,
-        password,
-        passwordConfirmation,
         phone,
         email,
       ] = validatedFields;
@@ -84,8 +81,6 @@ const SignUp: React.FC = () => {
         ...fieldErrors,
         name,
         birthDate,
-        password,
-        passwordConfirmation,
         phone,
         email,
       });
@@ -124,22 +119,38 @@ const SignUp: React.FC = () => {
   };
 
   const submitForm = async () => {
+    setIsFormEnable(false);
     const newState: PostNewCustomerDTO = {
-      name: formState.name,
-      city: formState.city,
-      email: formState.email,
-      password: formState.password,
-      neighborhood: formState.neighborhood,
-      state: formState.state,
-      streetName: formState.streetName,
-      birthDate: formState.birthDate.replace(/\D/g, ''),
-      phone: formState.phone.replace(/\D/g, ''),
-      postalCode: formState.postalCode.replace(/\D/g, ''),
+      name: formState.name.trim(),
+      city: formState.city.trim(),
+      email: formState.email.trim(),
+      neighborhood: formState.neighborhood.trim(),
+      state: formState.state.trim(),
+      streetName: formState.streetName.trim(),
+      birthDate: formState.birthDate.trim(),
+      phone: formState.phone.replace(/\D/g, '').trim(),
+      postalCode: formState.postalCode.replace(/\D/g, '').trim(),
     };
     try {
-      await postNewCustomer(newState);
+      await Axios.post('/api/customer', newState);
+      // postNewCustomer(newState);
+      setFormState(initialState);
+      setFieldErrors(initialState);
+      setActiveStep(1);
     } catch (error) {
-      configSnackBar({ message: error.toString(), time: 4, isError: true });
+      console.log(error);
+      console.log(error.response);
+      if (error.response) {
+        configSnackBar({
+          messages: error.response.data.details.map((detail) => detail.message),
+          time: 4,
+          isError: true,
+        });
+      } else {
+        configSnackBar({ messages: ['Houve um erro ao finalizar o cadastro. Tente novamente mais tarde'], time: 4, isError: true });
+      }
+    } finally {
+      setIsFormEnable(true);
     }
   };
 

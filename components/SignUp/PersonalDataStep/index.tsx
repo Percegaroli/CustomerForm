@@ -19,7 +19,6 @@ const PersonalDataStep = (props: Props) => {
 
   const renderInputElement = (
     formFieldKey: keyof CustomerForm,
-    isPassword?: boolean,
   ) => {
     const enumKey = formFieldKey.toUpperCase();
     return (
@@ -31,7 +30,6 @@ const PersonalDataStep = (props: Props) => {
         error={error[formFieldKey]}
         placeholder={CustomerFormFieldsPlaceholder[enumKey]}
         classes={{ container: styles.CustomerFormInput }}
-        type={isPassword ? 'password' : 'text'}
       />
     );
   };
@@ -42,8 +40,6 @@ const PersonalDataStep = (props: Props) => {
       {renderInputElement('email')}
       {renderInputElement('phone')}
       {renderInputElement('birthDate')}
-      {renderInputElement('password', true)}
-      {renderInputElement('passwordConfirmation', true)}
     </div>
   );
 };
