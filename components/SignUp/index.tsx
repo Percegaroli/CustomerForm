@@ -175,10 +175,14 @@ const SignUp: React.FC = () => {
   return (
     <div className={styles.Container}>
       <Card className={styles.FormCard}>
-        <h1 className={styles.Title}>Join Us</h1>
-        {renderActiveStep()}
-        <StepsIndicator activeStep={activeStep} />
-        {renderButtons()}
+        <div className={styles.Bar} />
+        <div className={styles.FormContainer}>
+          <h1 className={styles.Title}>Join Us</h1>
+          {renderActiveStep()}
+          <StepsIndicator activeStep={activeStep} />
+          {renderButtons()}
+        </div>
+
       </Card>
       {renderSnackBar()}
     </div>
