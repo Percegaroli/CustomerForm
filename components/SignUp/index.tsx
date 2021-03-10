@@ -29,6 +29,7 @@ const initialState: CustomerForm = {
 const SignUp: React.FC = () => {
   const [formState, setFormState] = useState(initialState);
   const [fieldErrors, setFieldErrors] = useState(initialState);
+  const [isFormEnable, setIsFormEnable] = useState(true);
   const [activeStep, setActiveStep] = useState(1);
   const { renderSnackBar, configSnackBar } = UseSnackBar();
 
@@ -113,7 +114,7 @@ const SignUp: React.FC = () => {
   };
 
   const advanceButtonAction = () => {
-    if (canAdvanceStep()) {
+    if (isFormEnable && canAdvanceStep()) {
       if (activeStep === 1) {
         setActiveStep(2);
       } else {
@@ -146,11 +147,16 @@ const SignUp: React.FC = () => {
     <div className={styles.ButtonsContainer}>
       <Button
         text="Back"
-        disabled={activeStep === 1}
+        disabled={activeStep === 1 || !isFormEnable}
         onClick={() => setActiveStep(1)}
         variant="outlined"
       />
-      <Button text="Next" onClick={advanceButtonAction} variant="filled" />
+      <Button
+        text="Next"
+        onClick={advanceButtonAction}
+        variant="filled"
+        disabled={!isFormEnable}
+      />
     </div>
   );
 
@@ -169,6 +175,8 @@ const SignUp: React.FC = () => {
       state={formState}
       setErrors={setFieldErrors}
       validateFields={validateFields}
+      enableForm={setIsFormEnable}
+      isFormEnabled={isFormEnable}
     />
   ));
 
@@ -177,8 +185,10 @@ const SignUp: React.FC = () => {
       <Card className={styles.FormCard}>
         <div className={styles.Bar} />
         <div className={styles.FormContainer}>
-          <h1 className={styles.Title}>Join Us</h1>
-          {renderActiveStep()}
+          <div className={styles.FormInputContainer}>
+            <h1 className={styles.Title}>Join Us</h1>
+            {renderActiveStep()}
+          </div>
           <StepsIndicator activeStep={activeStep} />
           {renderButtons()}
         </div>

@@ -41,7 +41,7 @@ const formatPostalCode = (postalCode: string) => {
   const postalCodeNumber = postalCode.trim().replace(/\D/g, '');
   if (postalCodeNumber.length > 5) {
     const fiveDigits = postalCodeNumber.slice(0, 5);
-    const leftOvers = postalCodeNumber.slice(5);
+    const leftOvers = postalCodeNumber.slice(5, 8);
     return `${fiveDigits}-${leftOvers}`;
   }
   return postalCodeNumber;

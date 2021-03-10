@@ -17,6 +17,7 @@ interface Props {
   placeholder?: string;
   classes?: InputClasses;
   type?: 'text' | 'password';
+  disabled?: boolean
 }
 
 const Input = (props: Props) => {
@@ -29,6 +30,7 @@ const Input = (props: Props) => {
     classes,
     placeholder,
     type,
+    disabled,
   } = props;
   const [isOnFocus, setIsOnFocus] = useState(false);
   const [classVariant, setClassVariant] = useState('');
@@ -62,10 +64,9 @@ const Input = (props: Props) => {
       onBlur={actionOnBlur}
       onFocus={() => setIsOnFocus(true)}
       placeholder={placeholder}
+      disabled={disabled}
       autoComplete="off"
-      className={`${styles.Input} ${classVariant} ${
-        classes.inputElement ?? ''
-      }`}
+      className={`${styles.Input} ${classVariant} ${classes.inputElement ?? ''} ${disabled ? styles.Disabled : ''}`}
     />
   );
 
@@ -97,6 +98,7 @@ Input.defaultProps = {
   classes: {},
   placeholder: '',
   type: 'text',
+  disabled: false,
 };
 
 export default Input;

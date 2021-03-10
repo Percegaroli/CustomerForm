@@ -29,3 +29,8 @@
   color: #ACACAC;
   border-color: #ACACAC;
 }
+
+.Filled.Disabled {
+  color: white;
+  background-color: #ACACAC;
+}

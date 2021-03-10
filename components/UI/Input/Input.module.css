@@ -21,6 +21,10 @@
   line-height: 12px;
 }
 
+.Disabled {
+  border: 1px solid #ACACAC !important;
+}
+
 .Selected {
   border: 2px solid #054A91;
 }

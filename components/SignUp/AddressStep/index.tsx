@@ -16,11 +16,13 @@ interface Props {
   error: CustomerForm;
   validateFields: (field: keyof CustomerForm) => void
   setErrors: (erros: CustomerForm) => void
+  enableForm: (isEnable: boolean) => void
+  isFormEnabled: boolean
 }
 
 const AddressStep = (props: Props) => {
   const {
-    state, onChangeInput, error, setState, validateFields, setErrors,
+    state, onChangeInput, error, setState, validateFields, setErrors, enableForm, isFormEnabled,
   } = props;
   const { configSnackBar, renderSnackBar } = UseSnackBar();
 
@@ -34,6 +36,7 @@ const AddressStep = (props: Props) => {
 
   const getAddress = async () => {
     if (!postalCodeValidation(state.postalCode)) {
+      enableForm(false);
       try {
         const { data } = await consultarEnderecoPeloCep(state.postalCode);
         const {
@@ -60,6 +63,8 @@ const AddressStep = (props: Props) => {
           time: 4,
           isError: true,
         });
+      } finally {
+        enableForm(true);
       }
     }
   };
@@ -75,6 +80,7 @@ const AddressStep = (props: Props) => {
         error={error[formFieldKey]}
         placeholder={CustomerFormFieldsPlaceholder[enumKey]}
         classes={{ container: styles.CustomerFormInput }}
+        disabled={!isFormEnabled}
       />
     );
   };

@@ -7,7 +7,7 @@
   font-size: 30px;
   line-height: 36px;
   color: #054A91;
-  margin: 0;
+  margin: 0 0 20px;
 }
 
 .FormCard {
@@ -29,6 +29,10 @@
 
 .ButtonsContainer button:last-of-type {
   margin-left: 21px;
+}
+
+.FormInputContainer {
+  min-height: calc(100vh - 60px - 9px - 56px - 25px);
 }
 
 @media (min-width: 801px) {
@@ -57,5 +61,9 @@
   .FormContainer {
     flex: 1;
     padding: 30px;
+  }
+
+  .FormInputContainer {
+    min-height: auto;
   }
 }
