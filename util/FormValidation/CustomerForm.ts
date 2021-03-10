@@ -50,8 +50,6 @@ export const CustomerFormValidation: ICustomerFormValidation = {
     return isEmailFilled || emailValidation(state[key]);
   },
   birthDate: (state, key) => birthDateValidation(state[key]),
-  password: (state, _) => passwordValidation(state),
-  passwordConfirmation: (state, _) => passwordValidation(state),
   postalCode: fieldNotValidated,
   streetName: fieldNotValidated,
   neighborhood: fieldNotValidated,
