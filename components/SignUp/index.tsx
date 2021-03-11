@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Axios from 'axios';
 import Card from '../UI/Card';
 import styles from './SignUp.module.css';
 import { CustomerForm } from '../../model/Customer/interface';
@@ -9,9 +8,9 @@ import AddressStep from './AddressStep';
 import { CustomerFormValidation } from '../../util/FormValidation/CustomerForm';
 import { CustomerFormMaskInput } from '../../util/FormFieldMask/CustomerForm';
 import PersonalDataStep from './PersonalDataStep';
-import { postNewCustomer } from '../../services/customer';
 import UseSnackBar from '../../hooks/UseSnackBar';
 import { PostNewCustomerDTO } from '../../services/customer/interface';
+import { postNewCustomerProxy } from '../../services/customer';
 
 const initialState: CustomerForm = {
   name: '',
@@ -132,15 +131,17 @@ const SignUp: React.FC = () => {
       postalCode: formState.postalCode.replace(/\D/g, '').trim(),
     };
     try {
-      await Axios.post('/api/customer', newState);
-      // postNewCustomer(newState);
+      await postNewCustomerProxy(newState);
       setFormState(initialState);
       setFieldErrors(initialState);
       setActiveStep(1);
+      configSnackBar({
+        messages: ['Cadastro realizado com sucesso'],
+        time: 4,
+        isError: false,
+      });
     } catch (error) {
-      console.log(error);
-      console.log(error.response);
-      if (error.response) {
+      if (error.response && error.response.data && error.response.data.details) {
         configSnackBar({
           messages: error.response.data.details.map((detail) => detail.message),
           time: 4,

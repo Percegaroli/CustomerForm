@@ -1,4 +1,3 @@
-import { CustomerForm } from '../../model/Customer/interface';
 import { ICustomerFormValidation } from './interface';
 
 const requiredFieldValidation = (value: string) => (value.trim() === '' ? 'Campo Obrigatório' : '');
