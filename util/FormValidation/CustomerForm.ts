@@ -1,3 +1,4 @@
+import { parse, isValid } from 'date-fns';
 import { ICustomerFormValidation } from './interface';
 
 const requiredFieldValidation = (value: string) => (value.trim() === '' ? 'Campo Obrigatório' : '');
@@ -13,8 +14,8 @@ const emailValidation = (email: string) => {
 };
 
 const birthDateValidation = (birthDate: string) => {
-  const date = new Date(birthDate);
-  return Number.isNaN(date.getTime()) ? 'Insira uma data de nascimento válida' : '';
+  const date = parse(birthDate, 'dd/MM/yyyy', new Date());
+  return !isValid(date) ? 'Insira uma data de nascimento válida' : '';
 };
 
 export const postalCodeValidation = (postalCode: string) => {
