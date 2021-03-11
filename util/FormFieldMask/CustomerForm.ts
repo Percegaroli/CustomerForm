@@ -57,8 +57,6 @@ export const CustomerFormMaskInput: ICustomerFormMask = {
   city: identity,
   email: identity,
   neighborhood: identity,
-  password: identity,
-  passwordConfirmation: identity,
   phone: formatPhoneNumber,
   postalCode: formatPostalCode,
   state: formatState,

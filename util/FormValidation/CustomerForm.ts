@@ -1,4 +1,4 @@
-import { CustomerForm } from '../../model/Customer/interface';
+import { parse, isValid } from 'date-fns';
 import { ICustomerFormValidation } from './interface';
 
 const requiredFieldValidation = (value: string) => (value.trim() === '' ? 'Campo Obrigatório' : '');
@@ -14,8 +14,8 @@ const emailValidation = (email: string) => {
 };
 
 const birthDateValidation = (birthDate: string) => {
-  const date = new Date(birthDate);
-  return Number.isNaN(date.getTime()) ? 'Insira uma data de nascimento válida' : '';
+  const date = parse(birthDate, 'dd/MM/yyyy', new Date());
+  return !isValid(date) ? 'Insira uma data de nascimento válida' : '';
 };
 
 export const postalCodeValidation = (postalCode: string) => {
@@ -28,18 +28,6 @@ const stateValidation = (state: string) => {
   return state.length !== 2 ? 'Insira um Estado válido' : '';
 };
 
-const passwordValidation = (state: CustomerForm) => {
-  const { password, passwordConfirmation } = state;
-  const passwordFilledError = requiredFieldValidation(password);
-  if (passwordFilledError) return passwordFilledError;
-  if (passwordConfirmation !== '') {
-    if (password !== passwordConfirmation) {
-      return 'Password must match';
-    }
-  }
-  return '';
-};
-
 const fieldNotValidated = () => '';
 
 export const CustomerFormValidation: ICustomerFormValidation = {
@@ -50,8 +38,6 @@ export const CustomerFormValidation: ICustomerFormValidation = {
     return isEmailFilled || emailValidation(state[key]);
   },
   birthDate: (state, key) => birthDateValidation(state[key]),
-  password: (state, _) => passwordValidation(state),
-  passwordConfirmation: (state, _) => passwordValidation(state),
   postalCode: fieldNotValidated,
   streetName: fieldNotValidated,
   neighborhood: fieldNotValidated,
